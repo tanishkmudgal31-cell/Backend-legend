@@ -32,6 +32,34 @@ async function createAccountController(req, res) {
 }
 
 
+// Get current user's accounts
+async function getMyAccounts(req, res) {
+  try {
+    const accounts = await accountModel
+      .find({
+        user: req.user._id,
+      })
+      .select("_id user currency status createdAt updatedAt")
+      .sort({
+        createdAt: -1,
+      });
+
+    return res.status(200).json({
+      message: "Accounts fetched successfully",
+      accounts,
+    });
+
+  } catch (error) {
+    console.error("Error fetching user accounts:", error);
+
+    return res.status(500).json({
+      message: "Unable to fetch accounts",
+      error: error.message,
+    });
+  }
+}
+
+
 // Get account balance
 async function getBalance(req, res) {
   try {
@@ -80,5 +108,6 @@ async function getBalance(req, res) {
 
 module.exports = {
   createAccountController,
+  getMyAccounts,
   getBalance,
 };

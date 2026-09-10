@@ -6,6 +6,7 @@ const {
 
 const {
   createAccountController,
+  getMyAccounts,
   getBalance,
 } = require("../controllers/account.controller");
 
@@ -17,6 +18,14 @@ router.post(
   "/",
   authMiddleware,
   createAccountController
+);
+
+
+// Get current user's accounts
+router.get(
+  "/me",
+  authMiddleware,
+  getMyAccounts
 );
 
 

@@ -7,6 +7,7 @@ const blacklistModel = require("../models/blacklist.model");
 const emailService = require("../services/email.service");
 
 
+// Create transaction
 async function createTransaction(req, res) {
   let session;
 
@@ -106,7 +107,6 @@ async function createTransaction(req, res) {
      */
 
     session = await mongoose.startSession();
-
 
     /*
      * 5. Execute the complete money transfer
@@ -493,7 +493,6 @@ async function createTransaction(req, res) {
       });
     }
 
-
   } catch (error) {
 
     /*
@@ -553,6 +552,162 @@ async function createTransaction(req, res) {
 }
 
 
+// Get transaction history for logged-in user
+async function getTransactions(req, res) {
+  try {
+    /*
+     * 1. Get all accounts belonging to the
+     *    currently logged-in user
+     */
+
+    const accounts = await accountModel
+      .find({
+        user: req.user._id,
+      })
+      .select("_id");
+
+    const accountIds = accounts.map(
+      (account) => account._id
+    );
+
+
+    /*
+     * If the user has no accounts,
+     * return an empty transaction list.
+     */
+
+    if (accountIds.length === 0) {
+      return res.status(200).json({
+        message: "Transactions fetched successfully",
+        transactions: [],
+        pagination: {
+          page: 1,
+          limit: 20,
+          totalTransactions: 0,
+          totalPages: 0,
+        },
+      });
+    }
+
+
+    /*
+     * 2. Pagination
+     */
+
+    const pageNumber = Math.max(
+      Number.parseInt(req.query.page, 10) || 1,
+      1
+    );
+
+    const limitNumber = Math.min(
+      Math.max(
+        Number.parseInt(req.query.limit, 10) || 20,
+        1
+      ),
+      100
+    );
+
+    const skip =
+      (pageNumber - 1) * limitNumber;
+
+
+    /*
+     * 3. Find transactions where the user's
+     *    account is either sender or receiver
+     */
+
+    const transactionFilter = {
+      $or: [
+        {
+          fromAccount: {
+            $in: accountIds,
+          },
+        },
+        {
+          toAccount: {
+            $in: accountIds,
+          },
+        },
+      ],
+    };
+
+
+    /*
+     * 4. Fetch transactions and total count
+     */
+
+    const [
+      transactions,
+      totalTransactions,
+    ] = await Promise.all([
+      transactionModel
+        .find(transactionFilter)
+        .sort({
+          createdAt: -1,
+        })
+        .skip(skip)
+        .limit(limitNumber)
+        .populate({
+          path: "fromAccount",
+          select: "_id currency status user",
+          populate: {
+            path: "user",
+            select: "name email",
+          },
+        })
+        .populate({
+          path: "toAccount",
+          select: "_id currency status user",
+          populate: {
+            path: "user",
+            select: "name email",
+          },
+        }),
+
+      transactionModel.countDocuments(
+        transactionFilter
+      ),
+    ]);
+
+
+    /*
+     * 5. Return transaction history
+     */
+
+    return res.status(200).json({
+      message:
+        "Transactions fetched successfully",
+
+      transactions,
+
+      pagination: {
+        page: pageNumber,
+        limit: limitNumber,
+        totalTransactions,
+        totalPages:
+          Math.ceil(
+            totalTransactions / limitNumber
+          ),
+      },
+    });
+
+  } catch (error) {
+    console.error(
+      "Error fetching transactions:",
+      error.message
+    );
+
+    return res.status(500).json({
+      message:
+        "Unable to fetch transaction history",
+
+      error: error.message,
+    });
+  }
+}
+
+
 module.exports = {
   createTransaction,
+  getTransactions,
 };
