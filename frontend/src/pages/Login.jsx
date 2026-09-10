@@ -69,9 +69,13 @@ function Login() {
         );
       }
 
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
-      setError(error.response?.data?.message || error.message || "Unable to login. Please try again.");
+      setError(
+        error.response?.data?.message ||
+          error.message ||
+          "Unable to login. Please try again."
+      );
     } finally {
       setLoading(false);
     }
