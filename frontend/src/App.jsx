@@ -5,6 +5,7 @@ import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Transfer from "./pages/Transfer.jsx";
+import Account from "./pages/Account.jsx";
 
 function App() {
   return (
@@ -33,6 +34,11 @@ function App() {
         <Route
           path="/transfer"
           element={<Transfer />}
+        />
+
+        <Route
+          path="/account"
+          element={<Account />}
         />
       </Routes>
     </BrowserRouter>

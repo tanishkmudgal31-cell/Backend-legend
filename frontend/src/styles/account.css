@@ -1,0 +1,35 @@
+.account-profile{display:grid;grid-template-columns:minmax(320px,1fr) minmax(240px,.8fr);gap:20px;margin-top:38px}
+.account-identity{display:flex;align-items:center;gap:18px;padding:27px 29px;border:1px solid rgba(67,209,239,.26);border-radius:16px;background:radial-gradient(circle at 86% 8%,rgba(27,195,230,.22),transparent 36%),linear-gradient(135deg,#08202c,#071219);box-shadow:0 20px 45px rgba(0,0,0,.18)}
+.account-avatar{flex-shrink:0;width:64px;height:64px;display:grid;place-items:center;border-radius:50%;color:#061017;background:#52d9f7;font-size:26px;font-weight:800}
+.account-identity-copy{min-width:0}
+.account-identity-copy h1{font-size:24px;letter-spacing:-1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.account-identity-copy p{margin-top:7px;color:#9ddcea;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.account-identity-copy .account-verified{display:inline-flex;align-items:center;gap:6px;margin-top:14px;padding:5px 10px;border:1px solid rgba(91,224,178,.25);border-radius:99px;color:#72e7ba;background:rgba(74,205,153,.09);font-size:10px;font-weight:700}
+.account-summary{padding:25px 27px;border:1px solid rgba(125,184,208,.15);border-radius:16px;background:rgba(10,25,33,.63)}
+.account-summary h2{margin-top:15px;font-size:22px;letter-spacing:-.8px}
+.account-summary>p:last-child{margin-top:12px;color:#849da9;font-size:13px;line-height:1.65}
+.account-detail-list{margin-top:20px;overflow:hidden;border:1px solid rgba(125,184,208,.15);border-radius:13px;background:rgba(7,18,24,.7)}
+.account-detail-row{display:grid;grid-template-columns:44px minmax(150px,1fr) auto;align-items:center;gap:16px;padding:17px 20px;border-bottom:1px solid rgba(125,184,208,.12)}
+.account-detail-row:last-child{border-bottom:0}
+.account-detail-icon{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;color:#66d7ec;background:rgba(59,180,207,.12)}
+.account-detail-label b,.account-detail-label small{display:block}
+.account-detail-label b{font-size:13px;color:#e6f5fa}
+.account-detail-label small{margin-top:5px;color:#809aa7;font-size:11px}
+.account-detail-value{color:#c8e6ef;font-size:13px;font-weight:600;text-align:right;word-break:break-all}
+.account-detail-value .account-status{padding:5px 10px;border:1px solid rgba(91,224,178,.25);border-radius:99px;color:#72e7ba;background:rgba(74,205,153,.09);font-size:10px;font-weight:700}
+.account-detail-value .account-status--frozen,.account-detail-value .account-status--closed{border-color:rgba(255,167,95,.3);color:#ffc07d;background:rgba(255,167,95,.08)}
+.account-copy-btn{display:inline-flex;align-items:center;gap:7px;padding:6px 10px;border:1px solid rgba(125,184,208,.2);border-radius:8px;color:#7fc8dc;background:transparent;font-size:11px;font-weight:600;cursor:pointer;transition:.2s}
+.account-copy-btn:hover{border-color:rgba(72,210,242,.42);color:#cdeef8;background:rgba(16,42,54,.7)}
+.account-prefs{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin-top:20px}
+.account-pref{display:flex;align-items:center;gap:13px;padding:18px;border:1px solid rgba(125,184,208,.15);border-radius:12px;background:rgba(10,25,33,.63)}
+.account-pref>svg{flex-shrink:0;color:#54d6f4}
+.account-pref-copy{min-width:0}
+.account-pref-copy b,.account-pref-copy span{display:block}
+.account-pref-copy b{font-size:13px;color:#e6f5fa}
+.account-pref-copy span{margin-top:4px;color:#829ba8;font-size:11px}
+.account-toggle{margin-left:auto;flex-shrink:0;width:40px;height:23px;padding:0;border:0;border-radius:99px;background:rgba(125,184,208,.18);cursor:pointer;transition:.2s}
+.account-toggle::after{content:"";display:block;width:17px;height:17px;margin:3px;border-radius:50%;background:#8da5b1;transition:.2s}
+.account-toggle[data-on="true"]{background:rgba(47,192,225,.35)}
+.account-toggle[data-on="true"]::after{margin-left:20px;background:#52d9f7}
+@media(max-width:900px){.account-profile{grid-template-columns:1fr}.account-prefs{grid-template-columns:1fr}}
+@media(max-width:520px){.account-profile{margin-top:28px}.account-identity{padding:22px}.account-avatar{width:56px;height:56px;font-size:22px}.account-detail-row{grid-template-columns:38px minmax(0,1fr);gap:12px;padding:15px 14px}.account-detail-value{grid-column:2;grid-row:2;text-align:left;margin-top:-8px}}
