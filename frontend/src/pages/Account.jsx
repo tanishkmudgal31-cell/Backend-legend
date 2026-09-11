@@ -30,7 +30,7 @@ function Account() {
   const [prefs, setPrefs] = useState({ alerts: true, statements: false, twoFactor: true, biometric: false });
 
   async function loadAccount() {
-    if (!localStorage.getItem("token")) { navigate("/login", { replace: true }); return; }
+    if (!localStorage.getItem("token")) { setAccount(null); setBalance(null); setLoading(false); return; }
     try {
       setLoading(true); setError("");
       const accountData = await getMyAccounts();
@@ -40,7 +40,7 @@ function Account() {
       const balanceData = await getAccountBalance(selectedAccount._id);
       setBalance(balanceData);
     } catch (requestError) {
-      if (requestError.response?.status === 401) { localStorage.removeItem("token"); localStorage.removeItem("user"); navigate("/login", { replace: true }); return; }
+      if (requestError.response?.status === 401) { localStorage.removeItem("token"); localStorage.removeItem("user"); setAccount(null); setBalance(null); return; }
       setError(errorMessage(requestError, "Unable to load your account details."));
     } finally { setLoading(false); }
   }
