@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { BadgeCheck, Bell, Building2, CalendarDays, Check, Copy, CreditCard, Fingerprint, LayoutDashboard, Lock, LogOut, Mail, ReceiptText, RefreshCw, Send, ShieldCheck, Settings, User, WalletCards } from "lucide-react";
+import { BadgeCheck, Bell, Building2, CalendarDays, Check, Copy, CreditCard, Fingerprint, LayoutDashboard, Lock, LogOut, Mail, Plus, ReceiptText, RefreshCw, Send, ShieldCheck, Settings, User, WalletCards } from "lucide-react";
 import { getAccountBalance, getMyAccounts, logoutUser } from "../services/api.js";
 import "../styles/dashboard.css";
 import "../styles/account.css";
@@ -26,6 +26,7 @@ function Account() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [loggingOut, setLoggingOut] = useState(false);
+  const [creating, setCreating] = useState(false);
   const [copied, setCopied] = useState(false);
   const [prefs, setPrefs] = useState({ alerts: true, statements: false, twoFactor: true, biometric: false });
 
@@ -49,6 +50,21 @@ function Account() {
 
   async function handleLogout() {
     try { setLoggingOut(true); await logoutUser(); } catch { /* local session must still be cleared */ } finally { localStorage.removeItem("token"); localStorage.removeItem("user"); navigate("/login", { replace: true }); }
+  }
+
+  async function handleCreateAccount() {
+    if (creating) return;
+    try {
+      setCreating(true);
+      setError("");
+      // TODO: wire to the real account-creation backend API, then refresh:
+      // await createAccount();
+      // await loadAccount();
+    } catch (requestError) {
+      setError(errorMessage(requestError, "Unable to create your account right now."));
+    } finally {
+      setCreating(false);
+    }
   }
 
   async function handleCopy() {
@@ -83,7 +99,7 @@ function Account() {
 
       {loading ? <div className="dashboard-loading"><i /><p>Loading your account details…</p></div>
         : error ? <div className="dashboard-error"><p>{error}</p><button onClick={loadAccount}><RefreshCw size={17} />Try again</button></div>
-        : !account ? <section className="dashboard-empty-account"><WalletCards size={32} /><p className="dashboard-kicker">ACCOUNT DETAILS</p><h1>No bank account yet</h1><p>Once your account is created it will appear here with its full details.</p><Link to="/dashboard">Back to dashboard</Link></section>
+        : !account ? <section className="dashboard-empty-account"><WalletCards size={32} /><p className="dashboard-kicker">ACCOUNT DETAILS</p><h1>No bank account yet</h1><p>Once your account is created it will appear here with its full details.</p><div className="account-empty-actions"><button type="button" className="account-create-btn" onClick={handleCreateAccount} disabled={creating}><Plus size={18} />{creating ? "Creating…" : "Create Account"}</button><Link to="/dashboard">Back to dashboard</Link></div></section>
         : <>
           <section className="account-profile">
             <article className="account-identity">
