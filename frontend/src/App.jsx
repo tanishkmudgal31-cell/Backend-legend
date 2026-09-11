@@ -4,13 +4,12 @@ import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
+import Transfer from "./pages/Transfer.jsx";
 
 function App() {
   return (
     <BrowserRouter>
-
       <Routes>
-
         <Route
           path="/"
           element={<Home />}
@@ -31,8 +30,11 @@ function App() {
           element={<Dashboard />}
         />
 
+        <Route
+          path="/transfer"
+          element={<Transfer />}
+        />
       </Routes>
-
     </BrowserRouter>
   );
 }

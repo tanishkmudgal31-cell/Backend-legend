@@ -1,0 +1,82 @@
+.transfer-page{min-height:100vh;display:grid;grid-template-columns:255px minmax(0,1fr);color:#edf7fb;background:#071016}
+.transfer-sidebar{position:fixed;inset:0 auto 0 0;width:255px;display:flex;flex-direction:column;padding:30px 18px 22px;border-right:1px solid rgba(125,184,208,.15);background:#050c12}
+.transfer-brand{padding:0 12px;color:#f2fbff;font-size:14px;font-weight:800;letter-spacing:-.5px}
+.transfer-brand span{color:#39d2f6}
+.transfer-sidebar nav{display:grid;gap:5px;margin-top:52px}
+.transfer-nav-item{display:flex;align-items:center;gap:12px;padding:12px;border-radius:9px;color:#8da5b1;font-size:13px;font-weight:600;transition:.2s}
+.transfer-nav-item--active{color:#dcf8ff;background:rgba(47,192,225,.1);box-shadow:inset 2px 0 #35d0f6}
+.transfer-nav-item--muted:hover{color:#d6f3fb;background:rgba(51,153,184,.08)}
+.transfer-sidebar-footer{margin-top:auto}
+.transfer-user-chip{display:flex;align-items:center;gap:10px;padding:15px 10px;border-block:1px solid rgba(125,184,208,.13)}
+.transfer-user-chip>span{width:33px;height:33px;display:grid;place-items:center;border-radius:50%;color:#061017;background:#52d9f7;font-size:13px;font-weight:800}
+.transfer-user-chip p{min-width:0}
+.transfer-user-chip b,.transfer-user-chip small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.transfer-user-chip b{font-size:12px}
+.transfer-user-chip small{margin-top:3px;color:#758f9d;font-size:10px}
+.transfer-sidebar-footer button,.transfer-mobile-logout{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;margin-top:13px;padding:10px;border:0;border-radius:8px;color:#91aab6;background:transparent;font-size:12px;transition:.2s;cursor:pointer}
+.transfer-sidebar-footer button:hover{color:#ffabab;background:rgba(255,91,91,.08)}
+.transfer-sidebar-footer button:disabled{opacity:.6;cursor:not-allowed}
+
+.transfer-main{grid-column:2;padding:44px min(5vw,72px) 65px;max-width:760px;width:100%}
+.transfer-header{display:flex;align-items:flex-start;justify-content:space-between}
+.transfer-kicker{color:#55d8f5;font-size:10px;font-weight:800;letter-spacing:2px}
+.transfer-header h1{margin-top:10px;font-size:clamp(24px,3vw,35px);font-weight:650;letter-spacing:-1.6px}
+.transfer-header>div>span{display:block;margin-top:8px;color:#819ba8;font-size:14px}
+.transfer-mobile-logout{display:none;width:auto;margin:0;padding:7px;color:#95aeba}
+
+.transfer-card{margin-top:34px;padding:28px 29px 30px;border:1px solid rgba(125,184,208,.15);border-radius:16px;background:rgba(10,25,33,.63);box-shadow:0 20px 45px rgba(0,0,0,.18)}
+.transfer-form-group{display:grid;gap:9px;margin-top:20px}
+.transfer-form-group:first-child{margin-top:0}
+.transfer-form-group label{color:#9ddcea;font-size:12px;font-weight:650}
+.transfer-form-group input,.transfer-form-group select{width:100%;padding:13px 14px;border:1px solid rgba(125,184,208,.22);border-radius:10px;color:#edf7fb;background:#0a1922;font-size:14px;font-family:inherit;transition:.2s}
+.transfer-form-group input::placeholder{color:#5c7684}
+.transfer-form-group input:focus,.transfer-form-group select:focus{outline:none;border-color:rgba(72,210,242,.55);box-shadow:0 0 0 3px rgba(72,210,242,.12)}
+.transfer-form-group select{appearance:none;cursor:pointer}
+.transfer-field-error{color:#ffadad;font-size:11.5px;font-weight:550}
+
+.transfer-balance-row{display:flex;align-items:center;gap:10px;margin-top:17px;padding:14px 16px;border:1px solid rgba(67,209,239,.22);border-radius:12px;color:#9ddcea;font-size:13px;background:radial-gradient(circle at 90% 10%,rgba(27,195,230,.14),transparent 55%)}
+.transfer-balance-row svg{color:#4bd7f5;flex:0 0 auto}
+.transfer-balance-row strong{margin-left:auto;color:#eaf9ff;font-size:16px;letter-spacing:-.4px}
+
+.transfer-submit-error{margin-top:20px;padding:12px 14px;border:1px solid rgba(255,120,120,.3);border-radius:10px;color:#ffadad;background:rgba(255,91,91,.08);font-size:13px}
+.transfer-success{display:flex;align-items:flex-start;gap:11px;margin-top:20px;padding:14px 16px;border:1px solid rgba(91,224,178,.28);border-radius:12px;background:rgba(74,205,153,.09)}
+.transfer-success svg{color:#66e7b3;flex:0 0 auto;margin-top:1px}
+.transfer-success b{display:block;color:#dcf8ff;font-size:13px}
+.transfer-success span{display:block;margin-top:4px;color:#9ab4c0;font-size:12px;word-break:break-word}
+
+.transfer-submit{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;margin-top:26px;padding:14px;border:1px solid #53d9f6;border-radius:10px;color:#031116;background:#53d9f6;font-size:14px;font-weight:750;cursor:pointer;transition:.2s}
+.transfer-submit:hover:not(:disabled){background:#6ee2f9}
+.transfer-submit:disabled{opacity:.65;cursor:not-allowed}
+.transfer-spinner{width:15px;height:15px;border:2.5px solid rgba(3,17,22,.35);border-top-color:#031116;border-radius:50%;animation:transfer-spin .75s linear infinite}
+
+.transfer-loading,.transfer-error-state,.transfer-empty-account{display:grid;place-items:center;text-align:center;min-height:320px;margin-top:30px;padding:35px;border:1px solid rgba(125,184,208,.15);border-radius:16px;background:rgba(10,25,33,.63)}
+.transfer-loading i{width:25px;height:25px;border:3px solid rgba(75,214,245,.2);border-top-color:#51daf6;border-radius:50%;animation:transfer-spin .75s linear infinite}
+.transfer-loading p{margin-top:13px;color:#8ca5b1;font-size:13px}
+.transfer-error-state p{max-width:430px;color:#ffadad;font-size:14px}
+.transfer-error-state button,.transfer-empty-account a{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:20px;padding:11px 16px;border:1px solid #53d9f6;border-radius:9px;color:#031116;background:#53d9f6;font-size:12px;font-weight:750;cursor:pointer}
+.transfer-empty-account{justify-items:center}
+.transfer-empty-account>svg{color:#57daf7}
+.transfer-empty-account h1{margin-top:15px;font-size:27px;letter-spacing:-1px}
+.transfer-empty-account>p:not(.transfer-kicker){margin-top:10px;color:#8aa2ae;font-size:14px}
+.transfer-empty-account .transfer-kicker{margin-top:21px}
+
+@keyframes transfer-spin{to{transform:rotate(360deg)}}
+
+@media(max-width:900px){
+  .transfer-page{display:block}
+  .transfer-sidebar{position:static;width:auto;min-height:0;padding:18px 20px;border-right:0;border-bottom:1px solid rgba(125,184,208,.15)}
+  .transfer-sidebar nav{display:flex;gap:5px;overflow:auto;margin:20px -8px 0;padding:0 8px}
+  .transfer-nav-item{white-space:nowrap}
+  .transfer-sidebar-footer{display:none}
+  .transfer-main{padding:30px 24px 50px;max-width:100%}
+  .transfer-mobile-logout{display:grid;place-items:center}
+}
+
+@media(max-width:520px){
+  .transfer-main{padding:25px 16px 40px}
+  .transfer-header h1{font-size:26px}
+  .transfer-header>div>span{font-size:12px}
+  .transfer-card{margin-top:24px;padding:22px}
+  .transfer-balance-row{flex-wrap:wrap}
+  .transfer-balance-row strong{margin-left:0;width:100%}
+}

@@ -50,14 +50,32 @@ export const getMyAccounts = async () => {
 };
 
 export const getAccountBalance = async (accountId) => {
-  const response = await api.get(`/accounts/balance/${accountId}`);
+  const response = await api.get(
+    `/accounts/balance/${accountId}`
+  );
+
   return response.data;
 };
 
 export const getRecentTransactions = async () => {
   const response = await api.get("/transactions", {
-    params: { page: 1, limit: 5 },
+    params: {
+      page: 1,
+      limit: 5,
+    },
   });
+
+  return response.data;
+};
+
+export const createTransaction = async (
+  transactionData
+) => {
+  const response = await api.post(
+    "/transactions/create",
+    transactionData
+  );
+
   return response.data;
 };
 
