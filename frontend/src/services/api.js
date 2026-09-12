@@ -19,64 +19,58 @@ api.interceptors.request.use((config) => {
 });
 
 export const registerUser = async (userData) => {
-  const response = await api.post(
-    "/auth/register",
-    userData
-  );
+  const response = await api.post("/auth/register", userData);
 
   return response.data;
 };
 
 export const loginUser = async (credentials) => {
-  const response = await api.post(
-    "/auth/login",
-    credentials
-  );
+  const response = await api.post("/auth/login", credentials);
 
   return response.data;
 };
 
 export const logoutUser = async () => {
-  const response = await api.post(
-    "/auth/logout"
-  );
+  const response = await api.post("/auth/logout");
 
   return response.data;
 };
 
 export const getMyAccounts = async () => {
-  const response = await api.get(
-    "/accounts/me"
-  );
+  const response = await api.get("/accounts/me");
 
   return response.data;
 };
 
 export const getAccountBalance = async (accountId) => {
-  const response = await api.get(
-    `/accounts/balance/${accountId}`
-  );
+  const response = await api.get(`/accounts/balance/${accountId}`);
 
   return response.data;
 };
 
 export const getRecentTransactions = async () => {
-  const response = await api.get(
-    "/transactions",
-    {
-      params: {
-        page: 1,
-        limit: 5,
-      },
-    }
-  );
+  const response = await api.get("/transactions", {
+    params: {
+      page: 1,
+      limit: 5,
+    },
+  });
 
   return response.data;
 };
 
-export const createTransaction = async (
-  transactionData
-) => {
+export const getTransactions = async (page = 1, limit = 5) => {
+  const response = await api.get("/transactions", {
+    params: {
+      page,
+      limit,
+    },
+  });
+
+  return response.data;
+};
+
+export const createTransaction = async (transactionData) => {
   const response = await api.post(
     "/transactions/create",
     transactionData
@@ -85,13 +79,8 @@ export const createTransaction = async (
   return response.data;
 };
 
-export const createAccount = async (
-  accountData = {}
-) => {
-  const response = await api.post(
-    "/accounts",
-    accountData
-  );
+export const createAccount = async (accountData = {}) => {
+  const response = await api.post("/accounts", accountData);
 
   return response.data;
 };
