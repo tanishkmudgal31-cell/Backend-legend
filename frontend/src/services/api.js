@@ -45,7 +45,10 @@ export const logoutUser = async () => {
 };
 
 export const getMyAccounts = async () => {
-  const response = await api.get("/accounts/me");
+  const response = await api.get(
+    "/accounts/me"
+  );
+
   return response.data;
 };
 
@@ -58,12 +61,15 @@ export const getAccountBalance = async (accountId) => {
 };
 
 export const getRecentTransactions = async () => {
-  const response = await api.get("/transactions", {
-    params: {
-      page: 1,
-      limit: 5,
-    },
-  });
+  const response = await api.get(
+    "/transactions",
+    {
+      params: {
+        page: 1,
+        limit: 5,
+      },
+    }
+  );
 
   return response.data;
 };
@@ -74,6 +80,17 @@ export const createTransaction = async (
   const response = await api.post(
     "/transactions/create",
     transactionData
+  );
+
+  return response.data;
+};
+
+export const createAccount = async (
+  accountData = {}
+) => {
+  const response = await api.post(
+    "/accounts",
+    accountData
   );
 
   return response.data;
