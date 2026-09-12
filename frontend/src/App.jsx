@@ -5,6 +5,7 @@ import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Transfer from "./pages/Transfer.jsx";
+import Transactions from "./pages/Transactions.jsx";
 import Account from "./pages/Account.jsx";
 
 function App() {
@@ -34,6 +35,11 @@ function App() {
         <Route
           path="/transfer"
           element={<Transfer />}
+        />
+
+        <Route
+          path="/transactions"
+          element={<Transactions />}
         />
 
         <Route
